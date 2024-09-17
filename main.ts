@@ -184,21 +184,21 @@ namespace OLED {
         }
     }
 
-    //% block="show text %text"
+    //% block="show text %text" weight=90
     export function showText(text: string) {
-        // Iterate over each character in the input text
-        for (let i = 0; i < text.length; i++) {
-            let charIndex = text.charCodeAt(i) - 32;  // Get the character's ASCII code
-            if (charIndex < 0 || charIndex > 94) continue;  // Only process characters in the font array
+    // Iterate over each character in the input text
+    for (let i = 0; i < text.length; i++) {
+        let charIndex = text.charCodeAt(i) - 32;  // Get the character's ASCII code
+        if (charIndex < 0 || charIndex > 94) continue;  // Only process characters in the font array
 
-            let charData = font[charIndex];  // Get the font data for the character
+        let charData = font[charIndex];  // Get the font data for the character
 
-            // Send the 5-byte font data for the character
-            for (let j = 0; j < 5; j++) {
-                sendData(charData[j]);
-            }
-            // Send a blank column (for spacing between characters)
-            sendData(0x00);
+        // Send the 5-byte font data for the character
+        for (let j = 0; j < 5; j++) {
+            sendData(charData[j]);
         }
+        // Send a blank column (for spacing between characters)
+        sendData(0x00);
     }
+}
 }
