@@ -1,16 +1,14 @@
-// OLED Display Driver for MicroBit using SPI
-
-//% weight=100 color=#0e5fe3 icon="\uf108" block="OLED"
+//% weight=100 color=#0fbc11 icon="\uf108" block="OLED"
 namespace OLED {
     let CS = DigitalPin.P14
     let DC = DigitalPin.P12
     let RES = DigitalPin.P16
 
-    //% block="initialise OLED display"
-    export function initialiseOLED() {
+    //% block="initialize OLED display"
+    export function initializeOLED() {
         resetDisplay();
 
-        // OLED initialisation sequence (SSD1306 controller)
+        // OLED initialization sequence (SSD1306 controller)
         sendCommand(0xAE);  // Display OFF
         sendCommand(0xD5);  // Set Display Clock Divide Ratio/Oscillator Frequency
         sendCommand(0x80);  // Display divide ratio/oscillator frequency
