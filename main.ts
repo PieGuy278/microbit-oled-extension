@@ -1,39 +1,12 @@
 // OLED Display Driver for MicroBit using SPI
 
+//% weight=100 color=#0fbc11 icon="\uf108" block="OLED"
 namespace OLED {
     let CS = DigitalPin.P14
     let DC = DigitalPin.P12
     let RES = DigitalPin.P16
 
-    // Initialize SPI (use micro:bit pins 13 for SCK and 15 for MOSI)
-    pins.spiPins(DigitalPin.P15, DigitalPin.P14, DigitalPin.P13)  // MOSI = Pin 15, MISO = not used, SCK = Pin 13
-    pins.spiFrequency(1000000)  // Set the baudrate to 1MHz
-    pins.spiFormat(8, 0)  // Set SPI to 8 bits per transfer and SPI mode 0
-
-    // Function to reset OLED display
-    export function resetDisplay() {
-        pins.digitalWritePin(RES, 0);  // Pull RES low
-        basic.pause(100);  // Wait 100ms
-        pins.digitalWritePin(RES, 1);  // Pull RES high
-    }
-
-    // Function to send a command to the OLED
-    export function sendCommand(command: number) {
-        pins.digitalWritePin(DC, 0);  // Set DC low to indicate command
-        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
-        pins.spiWrite(command);  // Send command via SPI
-        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
-    }
-
-    // Function to send data to the OLED
-    export function sendData(data: number) {
-        pins.digitalWritePin(DC, 1);  // Set DC high to indicate data
-        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
-        pins.spiWrite(data);  // Send data via SPI
-        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
-    }
-
-    // Initialize the OLED display with necessary commands
+    //% block="initialize OLED display"
     export function initializeOLED() {
         resetDisplay();
 
@@ -65,7 +38,30 @@ namespace OLED {
         sendCommand(0xAF);  // Display ON
     }
 
-    // Function to fill the screen
+    //% block="reset OLED display"
+    export function resetDisplay() {
+        pins.digitalWritePin(RES, 0);  // Pull RES low
+        basic.pause(100);  // Wait 100ms
+        pins.digitalWritePin(RES, 1);  // Pull RES high
+    }
+
+    //% block="send command %command"
+    export function sendCommand(command: number) {
+        pins.digitalWritePin(DC, 0);  // Set DC low to indicate command
+        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
+        pins.spiWrite(command);  // Send command via SPI
+        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
+    }
+
+    //% block="send data %data"
+    export function sendData(data: number) {
+        pins.digitalWritePin(DC, 1);  // Set DC high to indicate data
+        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
+        pins.spiWrite(data);  // Send data via SPI
+        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
+    }
+
+    //% block="fill screen with data"
     export function fillScreen() {
         // Fill the screen with data (all pixels ON in this case)
         for (let i = 0; i < 1024; i++) {  // For a 128x64 pixel OLED, 1024 bytes are needed
