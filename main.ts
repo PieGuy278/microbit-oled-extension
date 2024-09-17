@@ -160,6 +160,22 @@ namespace OLED {
         pins.digitalWritePin(RES, 1);  // Pull RES high
     }
 
+    //% block="send command %command"
+    export function sendCommand(command: number) {
+        pins.digitalWritePin(DC, 0);  // Set DC low to indicate command
+        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
+        pins.spiWrite(command);  // Send command via SPI
+        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
+    }
+
+    //% block="send data %data"
+    export function sendData(data: number) {
+        pins.digitalWritePin(DC, 1);  // Set DC high to indicate data
+        pins.digitalWritePin(CS, 0);  // Set CS low to start communication
+        pins.spiWrite(data);  // Send data via SPI
+        pins.digitalWritePin(CS, 1);  // Set CS high to end communication
+    }
+
     //% block="fill screen with data"
     export function fillScreen() {
         // Fill the screen with data (all pixels ON in this case)
