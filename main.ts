@@ -1,6 +1,6 @@
 // OLED Display Driver for MicroBit using SPI
 
-//% weight=100 color=#0fbc11 icon="\uf108" block="Knox SPI OLED"
+//% weight=100 color=#0e5fe3 icon="\uf108" block="OLED"
 namespace OLED {
     let CS = DigitalPin.P14
     let DC = DigitalPin.P12
