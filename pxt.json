@@ -1,5 +1,5 @@
 {
-    "name": "Knox SPI OLED",
+    "name": "OLED Display",
     "description": "An extension to control OLED displays using SPI with micro:bit. Includes block-based functions.",
     "dependencies": {
         "core": "*"
